@@ -1,0 +1,9 @@
+#!name=Locket Video 10s
+#!desc=longer_video subscriber
+#!version=1.0
+
+[Script]
+lk_video = type=http-response, pattern=^https:\/\/firebaseremoteconfig\.googleapis\.com\/, script-path=https://raw.githubusercontent.com/tdzinz/locket/main/locket-video.js, requires-body=true, max-size=-1, timeout=30
+
+[MITM]
+hostname = %APPEND% firebaseremoteconfig.googleapis.com

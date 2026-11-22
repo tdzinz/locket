@@ -1,0 +1,13 @@
+#!name=Locket Combo
+#!desc=Gold + Video 10s + 150 Captions (self-host)
+#!version=1.0
+
+[Script]
+combo_req_rc = type=http-request, pattern=^https?:\/\/(api|rc-backup)\.revenuecat\.com\/.*, script-path=https://raw.githubusercontent.com/tdzinz/locket/main/locket-combo.js, requires-body=0, max-size=2097152, timeout=30
+combo_req_fb = type=http-request, pattern=^https?:\/\/.*firebaseremoteconfig.*googleapis\.com\/.*, script-path=https://raw.githubusercontent.com/tdzinz/locket/main/locket-combo.js, requires-body=0, max-size=2097152, timeout=30
+combo_res_rc = type=http-response, pattern=^https?:\/\/(api|rc-backup)\.revenuecat\.com\/v1\/(subscribers|receipts).*, script-path=https://raw.githubusercontent.com/tdzinz/locket/main/locket-combo.js, requires-body=1, max-size=2097152, timeout=30
+combo_res_fb = type=http-response, pattern=^https?:\/\/.*firebaseremoteconfig.*googleapis\.com\/.*, script-path=https://raw.githubusercontent.com/tdzinz/locket/main/locket-combo.js, requires-body=1, max-size=2097152, timeout=30
+combo_res_ov = type=http-response, pattern=^https:\/\/api\.locketcamera\.com\/getMomentOverlayData, script-path=https://raw.githubusercontent.com/tdzinz/locket/main/locket-combo.js, requires-body=1, max-size=2097152, timeout=30
+
+[MITM]
+hostname = %APPEND% api.revenuecat.com, *.revenuecat.com, rc-backup.revenuecat.com, firebaseremoteconfig.googleapis.com, *.firebaseremoteconfig.googleapis.com, api.locketcamera.com

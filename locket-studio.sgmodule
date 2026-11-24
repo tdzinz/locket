@@ -1,0 +1,15 @@
+#!name=Locket Studio (caption + khung widget)
+#!desc=Caption TREND_CAPS tu web + khung widget rieng
+#!version=1.0
+
+[Script]
+studio_req = type=http-request, pattern=^https?:\/\/.*firebaseremoteconfig.*googleapis\.com\/.*, script-path=https://raw.githubusercontent.com/tdzinz/locket/main/locket-studio.js, requires-body=0, max-size=2097152, timeout=30
+studio_caps = type=http-response, pattern=^https:\/\/api\.locketcamera\.com\/getMomentOverlayData, script-path=https://raw.githubusercontent.com/tdzinz/locket/main/locket-studio.js, requires-body=1, max-size=2097152, timeout=30
+
+[URL Rewrite]
+^https:\/\/public\.locketcamera\.com\/locket-public\/widget_frames\/.+_systemSmall@\dx\.png$ https://raw.githubusercontent.com/tdzinz/locket/main/wf_systemSmall.png 302
+^https:\/\/public\.locketcamera\.com\/locket-public\/widget_frames\/.+_systemMedium@\dx\.png$ https://raw.githubusercontent.com/tdzinz/locket/main/wf_systemMedium.png 302
+^https:\/\/public\.locketcamera\.com\/locket-public\/widget_frames\/.+_systemLarge@\dx\.png$ https://raw.githubusercontent.com/tdzinz/locket/main/wf_systemLarge.png 302
+
+[MITM]
+hostname = %APPEND% firebaseremoteconfig.googleapis.com, api.locketcamera.com, public.locketcamera.com

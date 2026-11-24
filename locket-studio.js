@@ -14,6 +14,26 @@
     return;
   }
 
+  // Bat app tai lai danh sach chu thich tu server moi lan mo sheet
+  if ($response && isFB) {
+    var rc;
+    try { rc = JSON.parse($response.body); } catch (e) { $done({}); return; }
+    var entries = rc.entries || {};
+    var ovc = entries["overlays_v2_config"];
+    if (typeof ovc === "string") {
+      try {
+        var o = JSON.parse(ovc);
+        o.fetch_from_server = true;
+        o.remember_suggestions = true;
+        entries["overlays_v2_config"] = JSON.stringify(o);
+        $done({ body: JSON.stringify(rc) });
+        return;
+      } catch (e) {}
+    }
+    $done({});
+    return;
+  }
+
   if (!$response || !isOverlay) { $done({}); return; }
 
   var body;
